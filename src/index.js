@@ -1,23 +1,28 @@
-//Display current date & time
-let now = new Date();
+function formatDate(date) {
+  let hours = date.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+  let dayIndex = date.getDay();
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let day = days[dayIndex];
+  let todaytime = document.querySelector(`#today-time`);
 
-let days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday"
-];
-let day = days[now.getDay()];
-let todaytime = document.querySelector(`#today-time`);
-let hours = now.getHours();
-let minutes = now.getMinutes();
-let currentTime = `${hours} : ${minutes}`;
-todaytime.innerHTML = `${day} ${hours}:${minutes}`;
+  todaytime.innerHTML = `${day} ${hours}:${minutes}`;
+}
 
-//Temperature Conversion (Celsius to Fahrenheit, vice versa)
 function convertFahrenheit(event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("#current-temp");
@@ -36,8 +41,6 @@ fahrenheitLink.addEventListener("click", convertFahrenheit);
 
 let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", convertCelsius);
-
-//Location & Search
 
 function displayWeatherCondition(response) {
   document.querySelector("h1").innerHTML = response.data.name;
